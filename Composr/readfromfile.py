@@ -27,12 +27,10 @@ def buildDict(s):
 
   return dictionary
 
-#print the dict nicely
-#def printDict():
-#  print ( json.dumps(dictionary, indent=2))
 
-#def getWordList():
-#  pass
 
-#printDict()
-
+# uncomment this to print the dict nicely
+'''
+  print ( json.dumps(dictionary, indent=2))
+  
+'''

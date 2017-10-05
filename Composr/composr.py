@@ -15,8 +15,6 @@ from song_pos import *
 ############### Type Defs ###############
 
 #each field of stanza is a list of length 2 where
-#field[0] = minimum number
-#field[1] = maximum number
 Stanza = namedtuple("Stanza", "num_lines, num_words, num_syllables")
 
 #Intro, Chorus, Verse, and Outro are Stanzas
@@ -101,12 +99,10 @@ def read_template(genre):
 '''
 Returns a line and the next word
 '''
-#def write_line(starting_word, num_words_min, num_words_max, num_syllables_min, num_syllables_max):
 def write_line(song_structure, starting_word, num_words_min, num_words_max):
   word = starting_word
 
   num_words = randint(num_words_min, num_words_max)
-  #num_syllables = randint(num_syllables_min, num_syllables_max)
 
   line = ""
   syllables_used = 0
@@ -151,24 +147,7 @@ def write_line(song_structure, starting_word, num_words_min, num_words_max):
     
   word = word_generator.next_words(word, "", "country", 'probability')
   
-
-  '''
-  while syllables_used < num_syllables:
-    line = line + word + " "
-    words_used = words_used + 1
-    syllables_used = syllables_used + syllables.num_syllables(word)
-
-    #get the next word to use
-    next_word = word_generator.next_words(word, "", "country", 'probability')
-
-    #remove the space if a contraction or punctuation
-    if "'" in next_word or next_word in [",", ".", "?", "!"]:
-      line = line[0:-1]
-      line = line + next_word + " "
-      next_word = word_generator.next_words(next_word, "", "country", 'probability')
   
-    word = next_word
-  '''    
   print(structure)
   try:
     print(line)
@@ -191,27 +170,7 @@ def compose_song(genre, filename):
   chorus = Chorus([])
   verse = Verse([])
   outro = Outro([])
-  '''
-  mode = input("Type 'x' to create a song using an existing song as a template or type 's' to create from scratch: ")
-  if (mode == "x"):
-    artist = input("Artist name: ")
-    song_name = input("Song name: ")
-    try:
-      lyrics = getLyrics(artist, song_name)
-    except ValueError:
-      return []
-    
-    song_structure = create_structure(artist, song_name)
 
-    song = write_line(song_structure, lyrics[0], song_format.Chorus.num_words[0], song_format.Chorus.num_words[1])
-    if (filename != ""):
-      file_write = open(filename, "w")
-      file_write.write(song)
-      file_write.close()
-    return song
-  
-    
-  '''
   word = input("Input the starting word of the hook: ")
   #write the hook and the Word After Hook
   hook, w_a_h = write_line([], word, song_format.Chorus.num_words[0], song_format.Chorus.num_words[1])
